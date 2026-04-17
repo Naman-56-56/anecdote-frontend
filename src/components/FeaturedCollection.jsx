@@ -19,65 +19,73 @@ const products = [
 
 export default function FeaturedCollection() {
   return (
-    <section className="border-t border-slate-200 bg-white py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <p className="mb-2 text-xs uppercase tracking-[0.22em] text-slate-500">
-            Featured
-          </p>
-          <h2
-            className="text-2xl font-semibold tracking-tight text-slate-900 md:text-3xl"
-            style={{ fontFamily: 'var(--FONT-STACK-HEADING)' }}
-          >
-            Have You Ever Had a Dream?
-          </h2>
-          <div className="mx-auto mt-4 h-0.5 w-16 bg-slate-300" />
+    <section className="bg-white py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+        {/* Section header */}
+        <div className="mb-8 border-t border-[#e5e5e5] pt-8 sm:mb-10">
+          <div className="flex items-end justify-between">
+            <div>
+              <p className="mb-1.5 text-[9px] uppercase tracking-[0.28em] text-[#a3a3a3]">
+                Core Collection
+              </p>
+              <h2
+                className="text-3xl font-extrabold uppercase tracking-tight text-[#0a0a0a] sm:text-4xl"
+                style={{ fontFamily: 'var(--FONT-STACK-HEADING)' }}
+              >
+                Best Sellers
+              </h2>
+            </div>
+            <Link
+              to="/shop"
+              className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#a3a3a3] underline underline-offset-4 decoration-[#e5e5e5] transition-colors duration-200 hover:text-[#0a0a0a] hover:decoration-[#0a0a0a]"
+            >
+              View All
+            </Link>
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-          <div className="hidden md:block" />
+        {/* Asymmetric 2-up grid — full width on mobile, centered pair on desktop */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:mx-auto lg:max-w-3xl">
           {products.map((product) => (
-            <Link
-              key={product.id}
-              to="/shop"
-              className="group block"
-            >
-              <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(15,23,42,0.08)]">
-                <div className="relative aspect-[3/4] overflow-hidden bg-slate-100">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:opacity-0"
-                    loading="lazy"
-                  />
-                  <img
-                    src={product.hoverImage}
-                    alt={product.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
+            <Link key={product.id} to="/shop" className="group block">
+              {/* Image */}
+              <div className="relative aspect-[3/4] overflow-hidden bg-[#f5f5f5]">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:opacity-0 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+                <img
+                  src={product.hoverImage}
+                  alt={product.title}
+                  className="absolute inset-0 h-full w-full object-cover opacity-0 scale-100 transition-all duration-500 group-hover:opacity-100 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+              </div>
 
-                <div className="p-4">
-                  <h3 className="truncate text-xs font-medium text-slate-900 md:text-sm">
-                    {product.title}
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-500">{product.price}</p>
-                </div>
+              {/* Info */}
+              <div className="mt-3 space-y-0.5 pl-0.5">
+                <h3 className="truncate text-[12px] font-medium text-[#0a0a0a] sm:text-[13px]">
+                  {product.title}
+                </h3>
+                <p className="text-[11px] text-[#737373]">{product.price}</p>
               </div>
             </Link>
           ))}
-          <div className="hidden md:block" />
         </div>
 
+        {/* CTA */}
         <div className="mt-12 text-center">
           <Link
             to="/shop"
-            className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-slate-900 px-8 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-lg"
+            className="inline-flex h-12 items-center justify-center border border-[#0a0a0a] px-10 text-[10px] font-bold uppercase tracking-[0.2em] text-[#0a0a0a] transition-all duration-200 hover:bg-[#0a0a0a] hover:text-white active:scale-[0.98]"
           >
-            View All Collections
+            Shop Best Sellers
           </Link>
         </div>
+
       </div>
     </section>
   );

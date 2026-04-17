@@ -33,47 +33,56 @@ const products = [
 
 export default function FeaturedCollectionNewProducts() {
   return (
-    <section className="bg-slate-50 py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <h2
-            className="text-2xl font-semibold tracking-tight text-slate-900 md:text-3xl"
-            style={{ fontFamily: 'var(--FONT-STACK-HEADING)' }}
+    <section className="bg-white py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+        {/* Section header */}
+        <div className="mb-8 flex items-end justify-between border-t border-[#e5e5e5] pt-8 sm:mb-10">
+          <div>
+            <p className="mb-1.5 text-[9px] uppercase tracking-[0.28em] text-[#a3a3a3]">
+              Curated Edit
+            </p>
+            <h2
+              className="text-3xl font-extrabold uppercase tracking-tight text-[#0a0a0a] sm:text-4xl"
+              style={{ fontFamily: 'var(--FONT-STACK-HEADING)' }}
+            >
+              New Drop
+            </h2>
+          </div>
+          <Link
+            to="/shop"
+            className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#a3a3a3] underline underline-offset-4 decoration-[#e5e5e5] transition-colors duration-200 hover:text-[#0a0a0a] hover:decoration-[#0a0a0a]"
           >
-            New Arrivals
-          </h2>
-          <div className="mt-4 h-0.5 w-16 bg-slate-300" />
+            View All
+          </Link>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
+        {/* Product grid — 2-col mobile / 4-col desktop */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {products.map((product) => (
-            <Link
-              key={product.id}
-              to="/shop"
-              className="group block"
-            >
-              <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(15,23,42,0.08)]">
-                <div className="relative aspect-[3/4] overflow-hidden bg-slate-100">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:opacity-0"
-                    loading="lazy"
-                  />
-                  <img
-                    src={product.hoverImage}
-                    alt={product.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
+            <Link key={product.id} to="/shop" className="group block">
+              {/* Image */}
+              <div className="relative aspect-[3/4] overflow-hidden bg-[#f5f5f5]">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:opacity-0 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+                <img
+                  src={product.hoverImage}
+                  alt={product.title}
+                  className="absolute inset-0 h-full w-full object-cover opacity-0 scale-100 transition-all duration-500 group-hover:opacity-100 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+              </div>
 
-                <div className="p-4">
-                  <h3 className="truncate text-xs font-medium text-slate-900 md:text-sm">
-                    {product.title}
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-500">{product.price}</p>
-                </div>
+              {/* Info */}
+              <div className="mt-3 space-y-0.5 pl-0.5">
+                <h3 className="truncate text-[12px] font-medium text-[#0a0a0a] sm:text-[13px]">
+                  {product.title}
+                </h3>
+                <p className="text-[11px] text-[#737373]">{product.price}</p>
               </div>
             </Link>
           ))}

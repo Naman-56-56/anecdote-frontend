@@ -5,29 +5,28 @@ import EmptyState from '../components/EmptyState';
 import SectionWrapper from '../components/SectionWrapper';
 
 export default function Shop() {
-  const { products, loading, error, usingDemoData } = useProducts();
+  const { products, loading, error } = useProducts();
 
   return (
     <>
-      <SectionWrapper className="pb-0 pt-10 md:pt-14" padded={false}>
-        <div className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 md:pt-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
-            Shop
+      {/* Page header */}
+      <SectionWrapper className="pb-0 pt-6 sm:pt-10" padded={false}>
+        <div className="mx-auto max-w-7xl border-t border-[#e5e5e5] px-5 pb-8 pt-8 sm:px-6 sm:pt-10 lg:px-8">
+          <p className="mb-2 text-[9px] uppercase tracking-[0.28em] text-[#a3a3a3]">
+            Collection
           </p>
           <h1
-            className="mt-3 text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl"
+            className="text-4xl font-extrabold uppercase tracking-tight text-[#0a0a0a] sm:text-5xl lg:text-6xl"
             style={{ fontFamily: 'var(--FONT-STACK-HEADING)' }}
           >
-            Shop all
+            Shop All
           </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-500">
-            Discover refined essentials and standout pieces, curated for an elevated everyday wardrobe.
-          </p>
         </div>
       </SectionWrapper>
 
-      <SectionWrapper>
-        {loading && <Loader variant="grid" count={8} />}
+      {/* Products */}
+      <SectionWrapper className="pt-8 sm:pt-10">
+        {loading && <Loader variant="grid" count={6} />}
 
         {error && (
           <EmptyState
@@ -40,24 +39,17 @@ export default function Shop() {
 
         {!loading && !error && products.length === 0 && (
           <EmptyState
-            title="No products found"
-            description="Check back soon for new arrivals or try adjusting your filters."
+            title="No products yet"
+            description="Check back soon for new drops."
           />
         )}
 
         {!loading && !error && products.length > 0 && (
-          <>
-            {usingDemoData && (
-              <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-                No products found. Using demo data.
-              </div>
-            )}
-            <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-10">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         )}
       </SectionWrapper>
     </>

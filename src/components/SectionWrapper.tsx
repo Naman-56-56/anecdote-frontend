@@ -27,7 +27,7 @@ export default function SectionWrapper({
           observer.disconnect();
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.08 },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -36,13 +36,13 @@ export default function SectionWrapper({
   return (
     <section
       ref={ref}
-      className={`${
-        padded ? 'py-12 md:py-16' : ''
-      } transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'} ${className}`}
+      className={`${padded ? 'py-12 sm:py-16 md:py-20' : ''} transition-all duration-700 ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+      } ${className}`}
     >
       <div
-        className={`mx-auto px-4 sm:px-6 lg:px-8 ${
-          narrow ? 'max-w-4xl' : 'max-w-7xl'
+        className={`mx-auto px-5 sm:px-6 lg:px-8 ${
+          narrow ? 'max-w-3xl' : 'max-w-7xl'
         }`}
       >
         {children}
