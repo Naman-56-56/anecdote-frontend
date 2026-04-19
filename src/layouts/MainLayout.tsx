@@ -4,7 +4,7 @@ import FooterSection from '../components/FooterSection';
 
 export default function MainLayout() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#e6dac8] text-black">
+    <div className="flex min-h-screen flex-col bg-white text-black">
       <Navbar />
       <main className="flex-1">
         <Outlet />
