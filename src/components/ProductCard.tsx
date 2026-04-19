@@ -49,13 +49,13 @@ export default function ProductCard({ product }: ProductCardProps) {
     >
       <Link to={`/product/${product.handle}`} className="block">
         {/* Image container — no border, no shadow, no radius */}
-        <div className="relative aspect-[3/4] overflow-hidden bg-[#f5f5f5]">
+        <div className="relative aspect-[3/4] overflow-hidden bg-white">
           {/* Primary image */}
           {primary ? (
             <img
               src={primary.url}
               alt={primary.altText || product.title}
-              className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 ${
+              className={`absolute inset-0 h-full w-full object-contain transition-all duration-500 ${
                 hovered && hover ? 'opacity-0' : 'opacity-100'
               } ${hovered ? 'scale-[1.04]' : 'scale-100'}`}
               loading="lazy"
@@ -73,7 +73,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <img
               src={hover.url}
               alt={hover.altText || product.title}
-              className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 ${
+              className={`absolute inset-0 h-full w-full object-contain transition-all duration-500 ${
                 hovered ? 'opacity-100 scale-[1.04]' : 'opacity-0 scale-100'
               }`}
               loading="lazy"
