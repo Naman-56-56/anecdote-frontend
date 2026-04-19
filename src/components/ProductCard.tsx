@@ -49,7 +49,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     >
       <Link to={`/product/${product.handle}`} className="block">
         {/* Image container — no border, no shadow, no radius */}
-        <div className="relative aspect-[3/4] overflow-hidden bg-white">
+        <div className="relative aspect-[3/4] overflow-hidden bg-transparent">
           {/* Primary image */}
           {primary ? (
             <img

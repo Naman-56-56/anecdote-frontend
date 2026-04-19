@@ -27,7 +27,7 @@ export default function FooterSection() {
               Premium streetwear for those who express through what they wear.
             </p>
             {/* Social */}
-            <div className="mt-6 flex gap-4">
+            <div className="mt-6 flex gap-3">
               <a
                 href="https://www.instagram.com/anecdoteco_?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr"
                 target="_blank"
@@ -46,8 +46,8 @@ export default function FooterSection() {
                 aria-label="TikTok"
                 className="text-[#a3a3a3] transition-colors hover:text-[#0a0a0a]"
               >
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.2c0 1.96-.5 3.95-1.55 5.6-1.04 1.66-2.58 3-4.42 3.73-1.84.74-3.9.96-5.87.56-1.97-.4-3.78-1.35-5.13-2.76-1.36-1.42-2.22-3.32-2.48-5.28-.27-1.95.03-3.95 1-5.69.96-1.74 2.45-3.17 4.26-3.98 1.8-.8 3.84-1.02 5.78-.58V11.1c-1.34-.35-2.8-.2-4.04.4-1.25.59-2.24 1.64-2.75 2.92-.5 1.28-.56 2.7-.16 4 .39 1.3 1.24 2.44 2.37 3.12 1.12.69 2.45.92 3.74.65 1.28-.27 2.4-1.03 3.1-2.1.72-1.07 1-2.37.98-3.66V0h3.58z" />
+                <svg width="17" height="17" viewBox="3.5 2 16 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
                 </svg>
               </a>
             </div>
