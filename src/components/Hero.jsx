@@ -22,30 +22,17 @@ export default function Hero() {
       {/* Centered Minimal Content Overlay (OtakuComplex style) */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
         <div style={{ animation: 'fadeInUp 0.8s ease both' }}>
-          <p className="mb-4 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.3em] text-white/80">
-            Premium anime streetwear
-          </p>
-
           <h1
-            className="text-[14vw] font-extrabold uppercase leading-[0.9] tracking-tighter text-white sm:text-[80px] lg:text-[100px]"
+            className="text-[10vw] font-extrabold uppercase leading-[0.9] tracking-tighter text-white sm:text-[50px] lg:text-[70px]"
             style={{ fontFamily: 'var(--FONT-STACK-HEADING)' }}
           >
-            Built for
+            The Tarot
             <br />
-            expression.
+            Club
           </h1>
-
-          <div
-            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-            style={{ animation: 'fadeInUp 0.8s 0.2s ease both' }}
-          >
-            <Link
-              to="/"
-              className="inline-flex h-12 w-full sm:w-auto items-center justify-center bg-white px-10 text-[10px] font-bold uppercase tracking-[0.2em] text-[#0a0a0a] transition-all duration-200 hover:bg-white/90 active:scale-[0.98]"
-            >
-              Shop Collection
-            </Link>
-          </div>
+          <p className="mt-8 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.4em] text-white/90">
+            Live Now
+          </p>
         </div>
       </div>
     </section>

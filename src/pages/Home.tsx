@@ -27,22 +27,10 @@ export default function Home() {
     <>
       <Hero />
       
-      <section className="bg-white py-16 md:py-24">
+      <section className="bg-transparent py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           
-          {/* Single Section Header */}
-          <div className="mb-10 text-center border-t border-[#e5e5e5] pt-12 sm:mb-16">
-            <h2 
-              className="text-4xl font-extrabold uppercase tracking-widest text-[#0a0a0a] sm:text-5xl" 
-              style={{ fontFamily: 'var(--FONT-STACK-HEADING)' }}
-            >
-              The Tarot Club
-            </h2>
-            <p className="mt-4 text-[10px] uppercase tracking-[0.2em] text-[#a3a3a3]">
-              The Complete Collection
-            </p>
-          </div>
-          
+          {/* Products Grid */}
           {loading ? (
             <div className="flex h-48 items-center justify-center">
               <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#a3a3a3]">
