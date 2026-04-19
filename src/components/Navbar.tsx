@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-
+import Marquee from './Marquee';
 const NAV_LINKS = [
-  { to: '/shop', label: 'Shop' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },
 ] as const;
@@ -39,25 +38,32 @@ export default function Navbar() {
   }, []);
 
   // Icon / text color
-  const iconColor = transparent ? 'text-white' : 'text-[#0a0a0a]';
+  const textColor = transparent ? '#ffffff' : '#0a0a0a';
   const barColor  = transparent ? 'bg-white'   : 'bg-[#0a0a0a]';
 
   return (
     <>
-      {/* ━━━━━━━━━━━━ HEADER ━━━━━━━━━━━━ */}
-      <header
-        className={`fixed inset-x-0 top-0 z-50 h-14 transition-all duration-300 ease-in-out ${
-          transparent
-            ? 'bg-transparent border-b border-transparent'
-            : 'bg-white border-b border-[#e5e5e5] shadow-[0_1px_16px_rgba(0,0,0,0.05)]'
+      {/* ━━━━━━━━━━━━ HEADER WRAPPER ━━━━━━━━━━━━ */}
+      <div 
+        className={`fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-in-out ${
+          scrolled ? '-translate-y-10' : 'translate-y-0'
         }`}
       >
-        {/*
-          3-column flex layout:
-            [LEFT  flex-1] hamburger + desktop links
-            [CENTER      ] logo — always centered
-            [RIGHT flex-1] search + cart — pushed right
-        */}
+        <Marquee />
+        
+        <header
+          className={`h-14 transition-colors duration-300 ease-in-out ${
+            transparent
+              ? 'bg-transparent border-b border-transparent'
+              : 'bg-white border-b border-[#e5e5e5] shadow-[0_1px_16px_rgba(0,0,0,0.05)]'
+          }`}
+        >
+          {/*
+            3-column flex layout:
+              [LEFT  flex-1] hamburger + desktop links
+              [CENTER      ] logo — always centered
+              [RIGHT flex-1] search + cart — pushed right
+          */}
         <div className="mx-auto flex h-full max-w-7xl items-center px-5 sm:px-6 lg:px-8">
 
           {/* ── LEFT ── */}
@@ -67,7 +73,8 @@ export default function Navbar() {
             <button
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? 'Close menu' : 'Open menu'}
-              className={`flex h-9 w-9 flex-col items-center justify-center gap-[5px] transition-opacity hover:opacity-60 lg:hidden ${iconColor}`}
+              className="flex h-9 w-9 flex-col items-center justify-center gap-[5px] transition-opacity hover:opacity-60 lg:hidden"
+              style={{ color: textColor }}
             >
               <span className={`block h-[1.5px] w-[18px] ${barColor} transition-all duration-300 origin-center ${open ? 'translate-y-[6.5px] rotate-45' : ''}`} />
               <span className={`block h-[1.5px] w-[18px] ${barColor} transition-all duration-300 ${open ? 'opacity-0 scale-x-0' : ''}`} />
@@ -80,13 +87,12 @@ export default function Navbar() {
                 <NavLink
                   key={l.label}
                   to={l.to}
-                  className={({ isActive }) =>
-                    `text-[10px] uppercase tracking-[0.2em] transition-colors duration-200 ${
-                      transparent
-                        ? isActive ? 'text-white' : 'text-white/60 hover:text-white'
-                        : isActive ? 'text-[#0a0a0a]' : 'text-[#737373] hover:text-[#0a0a0a]'
-                    }`
-                  }
+                  className="text-[10px] uppercase tracking-[0.2em] transition-colors duration-200"
+                  style={({ isActive }) => ({
+                    color: transparent
+                      ? isActive ? '#ffffff' : 'rgba(255,255,255,0.7)'
+                      : isActive ? '#0a0a0a' : '#737373'
+                  })}
                 >
                   {l.label}
                 </NavLink>
@@ -98,12 +104,10 @@ export default function Navbar() {
           <div className="absolute left-1/2 -translate-x-1/2">
             <Link
               to="/"
-              className={`text-[13px] font-bold uppercase tracking-[0.28em] transition-colors duration-300 hover:opacity-70 ${
-                transparent ? 'text-white' : 'text-[#0a0a0a]'
-              }`}
-              style={{ fontFamily: 'var(--FONT-STACK-HEADING)' }}
+              className="text-[14px] font-bold lowercase tracking-[0.2em] transition-colors duration-300 hover:opacity-70"
+              style={{ fontFamily: 'var(--FONT-STACK-HEADING)', color: textColor }}
             >
-              Anecdote
+              anecdote
             </Link>
           </div>
 
@@ -113,7 +117,8 @@ export default function Navbar() {
             {/* Search icon */}
             <button
               aria-label="Search"
-              className={`flex h-9 w-9 items-center justify-center transition-opacity hover:opacity-60 ${iconColor}`}
+              className="flex h-9 w-9 items-center justify-center transition-opacity hover:opacity-60"
+              style={{ color: textColor }}
             >
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
                 <circle cx="11" cy="11" r="8" />
@@ -125,7 +130,8 @@ export default function Navbar() {
             <Link
               to="/cart"
               aria-label={`Cart (${itemCount} items)`}
-              className={`relative flex h-9 w-9 items-center justify-center transition-opacity hover:opacity-60 ${iconColor}`}
+              className="relative flex h-9 w-9 items-center justify-center transition-opacity hover:opacity-60"
+              style={{ color: textColor }}
             >
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 5h2l2.2 9.3A2 2 0 0 0 9.2 16h7.9a2 2 0 0 0 2-1.7L21 8H7.2" />
@@ -143,10 +149,9 @@ export default function Navbar() {
               )}
             </Link>
           </div>
-
         </div>
       </header>
-
+    </div>
       {/*
         Spacer: only inject on NON-homepage pages.
         On homepage, the hero overlays the transparent header — no spacer needed.

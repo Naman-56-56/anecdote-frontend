@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const QUICK_LINKS = [
-  { to: '/shop', label: 'Shop' },
+  { to: '/', label: 'Shop' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },
 ];

@@ -80,11 +80,11 @@
   --COLOR-BLACK:            #0a0a0a;
 
   /* ── Typography ── */
-  --FONT-STACK-HEADING:    'Space Grotesk', 'Inter', sans-serif;
-  --FONT-STACK-BODY:       'Inter', sans-serif;
-  --FONT-STACK-NAV:        'Inter', sans-serif;
-  --FONT-STACK-BUTTON:     'Inter', sans-serif;
-  --FONT-STACK-SUBHEADING: 'Space Grotesk', 'Inter', sans-serif;
+  --FONT-STACK-HEADING:    'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --FONT-STACK-BODY:       'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --FONT-STACK-NAV:        'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --FONT-STACK-BUTTON:     'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --FONT-STACK-SUBHEADING: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   --FONT-STYLE-BODY:         normal;
   --FONT-STYLE-HEADING:      normal;
@@ -125,4 +125,29 @@
   /* ── Misc ── */
   --drawer-width:      100vw;
   --drawer-transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Custom Animations ── */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 40s linear infinite;
 }

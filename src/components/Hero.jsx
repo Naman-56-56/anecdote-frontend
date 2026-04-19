@@ -40,7 +40,7 @@ export default function Hero() {
             style={{ animation: 'fadeInUp 0.8s 0.2s ease both' }}
           >
             <Link
-              to="/shop"
+              to="/"
               className="inline-flex h-12 w-full sm:w-auto items-center justify-center bg-white px-10 text-[10px] font-bold uppercase tracking-[0.2em] text-[#0a0a0a] transition-all duration-200 hover:bg-white/90 active:scale-[0.98]"
             >
               Shop Collection

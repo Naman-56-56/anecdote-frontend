@@ -313,9 +313,9 @@ const MOCK_VARIANT_IDS = new Set(
   MOCK_PRODUCTS.flatMap((product) => product.variants.map((variant) => variant.id)),
 );
 
-function useMockProducts(reason: ProductsSource): Product[] {
-  lastProductsSource = reason;
-  console.info('[Shopify] Using mock product fallback', { reason, count: MOCK_PRODUCTS.length });
+export function useMockProducts(source: ProductsSource): Product[] {
+  lastProductsSource = source;
+  console.info('[Shopify] Using mock product fallback', { source, count: MOCK_PRODUCTS.length });
   return MOCK_PRODUCTS;
 }
 
@@ -489,18 +489,18 @@ export async function getProducts(first: number = 250): Promise<Product[]> {
 
   try {
     const data = await shopifyRequest<GetProductsResponse>(query, { first });
+    console.log("Shopify products:", data);
     const products = data.products.edges.map(({ node }) => mapProduct(node));
 
     if (products.length === 0) {
-      console.info('[Shopify] Storefront API returned empty products array');
-      return useMockProducts('mock-empty');
+      console.warn('[Shopify] Storefront API returned exactly 0 products. Please verify products are PUBLISHED strictly to the Storefront App channel in Shopify Admin.');
     }
 
     lastProductsSource = 'shopify';
     return products;
   } catch (error) {
-    console.error('[Shopify] getProducts failed, falling back to mock data', error);
-    return useMockProducts('mock-error');
+    console.error('[Shopify] getProducts failed physically.', error);
+    return [];
   }
 }
 

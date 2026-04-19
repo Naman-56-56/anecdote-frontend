@@ -42,7 +42,7 @@ export default function Cart() {
           Looks like you haven't added anything yet.
         </p>
         <Link
-          to="/shop"
+          to="/"
           className="mt-10 inline-flex h-12 items-center justify-center bg-[#0a0a0a] px-10 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all duration-200 hover:bg-[#262626]"
         >
           Shop the Drop
@@ -194,7 +194,7 @@ export default function Cart() {
             </button>
 
             <Link
-              to="/shop"
+              to="/"
               className="mt-4 block text-center text-[10px] uppercase tracking-[0.18em] text-[#a3a3a3] underline underline-offset-4 transition-colors hover:text-[#0a0a0a]"
             >
               Continue Shopping

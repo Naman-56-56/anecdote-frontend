@@ -107,7 +107,7 @@ export default function ProductDetails() {
             Product not found
           </h2>
           <Link
-            to="/shop"
+            to="/"
             className="text-sm text-zinc-500 underline decoration-zinc-300 underline-offset-4 transition-colors duration-300 hover:text-black"
           >
             Back to Shop
@@ -171,7 +171,7 @@ export default function ProductDetails() {
               Home
             </Link>
             <span className="mx-2">/</span>
-            <Link to="/shop" className="transition-colors duration-300 hover:text-black">
+            <Link to="/" className="transition-colors duration-300 hover:text-black">
               Shop
             </Link>
             <span className="mx-2">/</span>

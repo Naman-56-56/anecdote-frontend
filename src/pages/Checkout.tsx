@@ -39,7 +39,7 @@ export default function Checkout() {
           title="Nothing to checkout"
           description="Add some items to your cart first."
           actionLabel="Shop Now"
-          actionTo="/shop"
+          actionTo="/"
         />
       </SectionWrapper>
     );
