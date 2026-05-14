@@ -130,27 +130,58 @@ export default function ProductDetails() {
     <SectionWrapper>
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14">
         <div className="space-y-4">
-          <div className="overflow-hidden rounded-md border border-zinc-200 bg-white shadow-[0_4px_18px_rgba(17,17,17,0.05)]">
-            {product.images[selectedImageIndex] && (
-              <img
-                src={product.images[selectedImageIndex].url}
-                alt={
-                  product.images[selectedImageIndex].altText || product.title
-                }
-                className="aspect-[4/5] w-full object-cover"
-              />
-            )}
+          {/* Native CSS Snap Carousel */}
+          <div 
+            className="flex w-full snap-x snap-mandatory overflow-x-auto scroll-smooth overscroll-x-contain [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            onScroll={(e) => {
+              const container = e.currentTarget;
+              const index = Math.round(container.scrollLeft / container.clientWidth);
+              if (index !== selectedImageIndex) setSelectedImageIndex(index);
+            }}
+          >
+            {product.images.map((img, idx) => (
+              <div key={img.id} className="w-full shrink-0 snap-center bg-[#f5f5f5]">
+                <img
+                  src={img.url}
+                  alt={img.altText || `${product.title} image ${idx + 1}`}
+                  className="h-auto w-full object-contain"
+                />
+              </div>
+            ))}
           </div>
+
+          {/* Pagination Dots (Mobile) */}
           {product.images.length > 1 && (
-            <div className="grid grid-cols-5 gap-3 sm:grid-cols-6">
+            <div className="flex justify-center gap-2 pt-2 sm:hidden">
+              {product.images.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`h-1 w-1 transition-all duration-300 ${
+                    idx === selectedImageIndex ? 'w-4 bg-[#0a0a0a]' : 'bg-[#d4d4d4]'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Desktop thumbnails */}
+          {product.images.length > 1 && (
+            <div className="hidden grid-cols-5 gap-1.5 sm:grid sm:grid-cols-6">
               {product.images.map((img, idx) => (
                 <button
                   key={img.id}
-                  onClick={() => setSelectedImageIndex(idx)}
-                  className={`aspect-square overflow-hidden rounded-md border transition-all duration-300 ${
+                  onClick={() => {
+                    setSelectedImageIndex(idx);
+                    const container = document.querySelector('.snap-x');
+                    if (container) {
+                      const target = container.children[idx] as HTMLElement;
+                      container.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
+                    }
+                  }}
+                  className={`aspect-square overflow-hidden bg-[#f5f5f5] transition-all duration-200 ${
                     idx === selectedImageIndex
-                      ? 'border-black ring-2 ring-black/10'
-                      : 'border-zinc-200 hover:border-zinc-400'
+                      ? 'ring-1 ring-[#0a0a0a] ring-offset-1'
+                      : 'opacity-60 hover:opacity-100'
                   }`}
                 >
                   <img
@@ -165,37 +196,30 @@ export default function ProductDetails() {
         </div>
 
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <div className="rounded-md border border-zinc-200 bg-white p-6 shadow-[0_4px_18px_rgba(17,17,17,0.05)] md:p-8">
-          <nav className="mb-6 text-xs text-zinc-500">
-            <Link to="/" className="transition-colors duration-300 hover:text-black">
+          <div className="bg-white py-4 md:py-0">
+          <nav className="mb-6 text-[10px] uppercase tracking-[0.18em] text-[#a3a3a3]">
+            <Link to="/" className="transition-colors duration-300 hover:text-[#0a0a0a]">
               Home
             </Link>
             <span className="mx-2">/</span>
-            <Link to="/" className="transition-colors duration-300 hover:text-black">
-              Shop
-            </Link>
-            <span className="mx-2">/</span>
-            <span className="text-black">{product.title}</span>
+            <span className="text-[#0a0a0a]">{product.title}</span>
           </nav>
 
           <h1
-            className="mb-3 text-3xl font-semibold tracking-tight text-black md:text-4xl"
+            className="mb-3 text-3xl font-extrabold uppercase leading-tight tracking-tight text-[#0a0a0a] md:text-4xl"
             style={{ fontFamily: 'var(--FONT-STACK-HEADING)' }}
           >
             {product.title}
           </h1>
 
-          <p className="mb-8 text-2xl font-medium text-black">{formattedPrice}</p>
+          <p className="mb-8 text-2xl font-semibold text-[#0a0a0a]">{formattedPrice}</p>
 
           {Object.entries(optionGroups).map(([name, values]) => (
             <div key={name} className="mb-6">
-              <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500">
-                {name}:{' '}
-                <span className="font-normal text-black">
-                  {selectedOptions[name]}
-                </span>
+              <label className="mb-3 block text-[10px] font-bold uppercase tracking-[0.2em] text-[#737373]">
+                {name}
               </label>
-              <div className="flex flex-wrap gap-2.5">
+              <div className="flex flex-wrap gap-2">
                 {values.map((value) => (
                   <button
                     key={value}
@@ -205,10 +229,10 @@ export default function ProductDetails() {
                         [name]: value,
                       }))
                     }
-                    className={`rounded-full border px-4 py-2 text-xs font-medium transition-all duration-300 ${
+                    className={`h-9 min-w-[2.5rem] px-4 text-[11px] font-medium transition-all duration-200 ${
                       selectedOptions[name] === value
-                        ? 'border-black bg-black text-white shadow-sm'
-                        : 'border-zinc-200 bg-white text-zinc-600 hover:border-zinc-400 hover:text-black'
+                        ? 'bg-[#0a0a0a] text-white'
+                        : 'border border-[#e5e5e5] text-[#0a0a0a] hover:border-[#0a0a0a]'
                     }`}
                   >
                     {value}
@@ -219,22 +243,22 @@ export default function ProductDetails() {
           ))}
 
           <div className="mb-8">
-            <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500">
+            <label className="mb-3 block text-[10px] font-bold uppercase tracking-[0.2em] text-[#737373]">
               Quantity
             </label>
-            <div className="inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50">
+            <div className="inline-flex items-center border border-[#e5e5e5]">
               <button
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                className="px-4 py-3 text-zinc-500 transition-all duration-300 hover:bg-white hover:text-black"
+                className="flex h-11 w-11 items-center justify-center text-[#0a0a0a] transition-colors duration-300 hover:bg-[#f5f5f5]"
               >
                 &minus;
               </button>
-              <span className="min-w-[3.5rem] px-4 py-3 text-center text-sm font-medium text-black">
+              <span className="flex h-11 min-w-[3rem] items-center justify-center text-sm font-medium text-[#0a0a0a]">
                 {quantity}
               </span>
               <button
                 onClick={() => setQuantity((q) => q + 1)}
-                className="px-4 py-3 text-zinc-500 transition-all duration-300 hover:bg-white hover:text-black"
+                className="flex h-11 w-11 items-center justify-center text-[#0a0a0a] transition-colors duration-300 hover:bg-[#f5f5f5]"
               >
                 +
               </button>
@@ -243,17 +267,11 @@ export default function ProductDetails() {
 
           {selectedVariant && (
             <p
-              className={`mb-4 text-xs font-medium ${
+              className={`mb-6 text-[11px] font-medium uppercase tracking-[0.05em] ${
                 isAvailable ? 'text-emerald-600' : 'text-rose-600'
               }`}
             >
-              {isAvailable
-                ? `In stock${
-                    selectedVariant.inventoryQuantity > 0
-                      ? ` (${selectedVariant.inventoryQuantity} available)`
-                      : ''
-                  }`
-                : 'Out of stock'}
+              {isAvailable ? 'Available Now' : 'Out of Stock'}
             </p>
           )}
 
