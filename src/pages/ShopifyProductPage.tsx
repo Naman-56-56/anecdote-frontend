@@ -118,26 +118,42 @@ export default function ShopifyProductPage() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_420px] lg:gap-16 xl:grid-cols-[1fr_480px]">
 
-          {/* ── Image gallery ── */}
+          {/* ── Image gallery (Swipeable) ── */}
           <div>
-            {/* Main image — no radius, no border */}
-            <div className="aspect-[3/4] overflow-hidden bg-[#f5f5f5]">
-              {currentImage && (
-                <img
-                  src={currentImage.url}
-                  alt={currentImage.altText || product.title}
-                  className="h-full w-full object-cover"
-                />
-              )}
+            <div className="flex w-full snap-x snap-mandatory overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              {product.images.map((img, idx) => (
+                <div key={idx} className="w-full shrink-0 snap-center bg-[#f5f5f5]">
+                  <img
+                    src={img.url}
+                    alt={img.altText || `${product.title} image ${idx + 1}`}
+                    className="h-auto w-full object-contain"
+                  />
+                </div>
+              ))}
             </div>
 
-            {/* Thumbnails */}
+            {/* Swipe hint */}
             {product.images.length > 1 && (
-              <div className="mt-2 grid grid-cols-5 gap-1.5 sm:grid-cols-6">
+              <p className="mt-3 text-center text-[10px] uppercase tracking-[0.2em] text-[#a3a3a3] sm:hidden">
+                Swipe for more
+              </p>
+            )}
+
+            {/* Desktop thumbnails (optional, but good fallback for non-touch devices) */}
+            {product.images.length > 1 && (
+              <div className="mt-2 hidden grid-cols-5 gap-1.5 sm:grid sm:grid-cols-6">
                 {product.images.map((img, idx) => (
                   <button
                     key={idx}
-                    onClick={() => setSelectedImageIndex(idx)}
+                    onClick={() => {
+                      setSelectedImageIndex(idx);
+                      // Scroll the container to this image
+                      const container = document.querySelector('.snap-x');
+                      if (container) {
+                        const target = container.children[idx] as HTMLElement;
+                        container.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
+                      }
+                    }}
                     className={`aspect-square overflow-hidden bg-[#f5f5f5] transition-all duration-200 ${
                       idx === selectedImageIndex
                         ? 'ring-1 ring-[#0a0a0a] ring-offset-1'
