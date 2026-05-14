@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=1600&h=1200&fit=crop&q=85';
+const HERO_IMAGE = '/hero.jpeg';
 
 export default function Hero() {
   return (
