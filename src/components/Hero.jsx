@@ -29,9 +29,14 @@ export default function Hero() {
             <br />
             Club
           </h1>
-          <p className="mt-8 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.4em] text-white/90">
+          <button
+            onClick={() => {
+              document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="mt-8 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.4em] text-white/90 hover:text-white transition-colors duration-200 cursor-pointer focus:outline-none"
+          >
             Live Now
-          </p>
+          </button>
         </div>
       </div>
     </section>

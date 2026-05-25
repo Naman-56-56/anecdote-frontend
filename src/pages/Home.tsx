@@ -27,7 +27,7 @@ export default function Home() {
     <>
       <Hero />
       
-      <section className="bg-transparent py-16 md:py-24">
+      <section id="products-section" className="bg-transparent py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           
           {/* Products Grid */}

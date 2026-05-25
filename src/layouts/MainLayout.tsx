@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import FooterSection from '../components/FooterSection';
+import KlaviyoPopup from '../components/KlaviyoPopup';
 
 export default function MainLayout() {
   return (
@@ -10,6 +11,7 @@ export default function MainLayout() {
         <Outlet />
       </main>
       <FooterSection />
+      <KlaviyoPopup />
     </div>
   );
 }
