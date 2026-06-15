@@ -120,7 +120,7 @@ export default function ProductDetails() {
   const formattedPrice = selectedVariant
     ? new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: product.priceRange.currencyCode || 'EUR',
+        currency: product.priceRange.currencyCode || 'USD',
       }).format(parseFloat(selectedVariant.price))
     : '';
 

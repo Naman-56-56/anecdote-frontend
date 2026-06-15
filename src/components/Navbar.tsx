@@ -139,7 +139,7 @@ export default function Navbar() {
                   {filteredProducts.map((p) => {
                     const price = new Intl.NumberFormat('en-US', {
                       style: 'currency',
-                      currency: p.priceRange.currencyCode || 'EUR',
+                      currency: p.priceRange.currencyCode || 'USD',
                     }).format(parseFloat(p.priceRange.min));
                     
                     return (

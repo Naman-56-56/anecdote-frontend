@@ -4,14 +4,14 @@ const products = [
   {
     id: '1',
     title: 'Dream Heritage Hoodie',
-    price: '€69.95',
+    price: '$69.95',
     image: 'https://images.unsplash.com/photo-1578681994506-b8f463449011?w=600&h=780&fit=crop',
     hoverImage: 'https://images.unsplash.com/photo-1609873814058-a8928924184a?w=600&h=780&fit=crop',
   },
   {
     id: '2',
     title: 'Dream Heritage Tee',
-    price: '€37.95',
+    price: '$37.95',
     image: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=600&h=780&fit=crop',
     hoverImage: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600&h=780&fit=crop',
   },

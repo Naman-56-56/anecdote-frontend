@@ -19,7 +19,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const formattedPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: product.priceRange.currencyCode || 'EUR',
+    currency: product.priceRange.currencyCode || 'USD',
   }).format(parseFloat(product.priceRange.min));
 
   function handleQuickAdd(e: React.MouseEvent) {
