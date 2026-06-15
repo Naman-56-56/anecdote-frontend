@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useProduct } from '../hooks';
 import { useCart } from '../context/CartContext';
-import Button from '../components/Button';
 import Loader from '../components/Loader';
 import SectionWrapper from '../components/SectionWrapper';
 
