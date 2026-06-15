@@ -5,10 +5,10 @@ import Button from '../components/Button';
 import SectionWrapper from '../components/SectionWrapper';
 import EmptyState from '../components/EmptyState';
 
-function formatEUR(amount: number): string {
+function formatUSD(amount: number): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'EUR',
+    currency: 'USD',
   }).format(amount);
 }
 
@@ -84,7 +84,7 @@ export default function Checkout() {
                 <p className="text-xs text-slate-500">Qty: {item.quantity}</p>
               </div>
               <p className="text-sm font-medium text-slate-900">
-                {formatEUR(parseFloat(item.price) * item.quantity)}
+                {formatUSD(parseFloat(item.price) * item.quantity)}
               </p>
             </div>
           ))}
@@ -93,7 +93,7 @@ export default function Checkout() {
         <div className="mt-6 border-t border-slate-200 pt-6">
           <div className="flex justify-between items-center">
             <span className="text-sm font-semibold uppercase text-slate-900">Total</span>
-            <span className="text-xl font-semibold text-slate-900">{formatEUR(subtotal)}</span>
+            <span className="text-xl font-semibold text-slate-900">{formatUSD(subtotal)}</span>
           </div>
         </div>
       </div>
