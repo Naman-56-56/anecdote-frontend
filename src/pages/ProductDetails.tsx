@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useProduct } from '../hooks';
 import { useCart } from '../context/CartContext';
@@ -13,6 +13,18 @@ export default function ProductDetails() {
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
     null,
   );
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const mobileSliderRef = useRef<HTMLDivElement>(null);
+  
+  const handleMobileScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const width = container.clientWidth;
+    if (width > 0) {
+      const index = Math.round(scrollLeft / width);
+      setActiveImageIndex(index);
+    }
+  };
   const [addedToCart, setAddedToCart] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<
     Record<string, string>
@@ -165,24 +177,66 @@ export default function ProductDetails() {
 
   return (
     <SectionWrapper>
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.42fr_0.58fr] lg:gap-16">
-        {/* Left Column: Image Grid */}
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 gap-4">
+      <div className="flex flex-col lg:flex-row lg:gap-12">
+        {/* Left Column: Image Area — takes 60% on desktop */}
+        <div className="w-full lg:w-[60%]">
+          {/* Mobile Layout: Touch-Swipeable Carousel */}
+          <div className="relative md:hidden overflow-hidden">
+            <div
+              ref={mobileSliderRef}
+              onScroll={handleMobileScroll}
+              className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
+            >
+              {product.images.map((img) => (
+                <img
+                  key={img.id}
+                  src={img.url}
+                  alt={img.altText || product.title}
+                  className="w-full shrink-0 snap-center h-auto object-cover"
+                />
+              ))}
+            </div>
+
+            {/* Pagination Dots */}
+            {product.images.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                {product.images.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      if (mobileSliderRef.current) {
+                        mobileSliderRef.current.scrollTo({
+                          left: idx * mobileSliderRef.current.clientWidth,
+                          behavior: 'smooth',
+                        });
+                      }
+                    }}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      activeImageIndex === idx ? 'bg-black w-4' : 'bg-neutral-300 w-1.5'
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Desktop Layout: Side-by-Side */}
+          <div className="hidden md:flex md:gap-3">
             {product.images.map((img) => (
-              <div key={img.id} className="aspect-[3/4] bg-[#f5f5f5] flex items-center justify-center overflow-hidden">
+              <div key={img.id} className="flex-1 min-w-0">
                 <img
                   src={img.url}
                   alt={img.altText || product.title}
-                  className="h-full w-full object-contain transition-transform duration-500 hover:scale-105"
+                  className="w-full h-auto object-cover transition-transform duration-500 hover:scale-[1.02]"
                 />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Right Column: Details */}
-        <div className="lg:sticky lg:top-28 lg:self-start">
+        {/* Right Column: Details — takes 40% on desktop */}
+        <div className="w-full lg:w-[40%] mt-10 lg:mt-0 lg:sticky lg:top-28 lg:self-start">
           <div className="bg-white py-4 md:py-0">
             {/* Title & Price Row */}
             <div className="flex items-baseline justify-between gap-4 border-b border-neutral-100 pb-3">
